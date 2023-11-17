@@ -4,27 +4,27 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Note;
-use \Illuminate\Http\Response;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class NoteController extends Controller
 {
     public function destroy(Note $note) {
-        /* if (!Gate::allows('change-note', $note)) {
+        if (!Gate::allows('change-note', $note)) {
                  abort(Response::HTTP_FORBIDDEN);
              }
-             */
+
         $note->delete();
 
         return back()->with('success', 'Your note has been deleted');
     }
 
     public function fav(Note $note) {
-        /* if (!Gate::allows('change-note', $note)) {
+        if (!Gate::allows('change-note', $note)) {
             abort(Response::HTTP_FORBIDDEN);
         }
-        */
+
         $note->favorite = !$note->favorite;
 
 
@@ -46,10 +46,10 @@ class NoteController extends Controller
     }
 
     public function edit(Note $note){
-        /* if (!Gate::allows('change-note', $note)) {
+        if (!Gate::allows('change-note', $note)) {
           abort(Response::HTTP_FORBIDDEN);
       }
-      */
+
 
 
         return view('notes.edit', ['note' => $note]);
@@ -58,10 +58,9 @@ class NoteController extends Controller
     }
 
     public function update(Note $note){
-        /* if (!Gate::allows('change-note', $note)) {
+        if (!Gate::allows('change-note', $note)) {
           abort(Response::HTTP_FORBIDDEN);
       }
-      */
 
 
         $attributes = request()->validate([
